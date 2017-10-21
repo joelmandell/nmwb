@@ -1,0 +1,39 @@
+{
+  "name": "nmwb",
+  "version": "1.0.0",
+  "description": "MWB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  ***REMOVED***,
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.11.7",
+    "graphql-sequelize": "^5.4.3",
+    "lodash": "^4.17.4",
+    "mysql2": "^1.4.2",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.14.0"
+  ***REMOVED***,
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "chai-array": "0.0.2",
+    "chai-arrays": "^2.0.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-properties": "^1.2.1",
+    "chai-things": "^0.2.0",
+    "graphql-tester": "0.0.5",
+    "mocha": "^4.0.1",
+    "sinon": "^4.0.1",
+    "sinon-chai": "^2.14.0"
+  ***REMOVED***
+***REMOVED***
