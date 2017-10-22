@@ -1,6 +1,6 @@
 import {	
 GraphQLObjectType,GraphQLString,GraphQLInt, GraphQLSchema, GraphQLList, GraphQLBoolean,
-GraphQLInputType
+GraphQLInputObjectType
 ***REMOVED*** from 'graphql'
 
 import Sequelize from 'sequelize'
@@ -32,12 +32,47 @@ const ScheduleType = new GraphQLObjectType({
 		taxanomyId: { type: GraphQLInt ***REMOVED***,
 		pupilId: { type: GraphQLInt ***REMOVED***,
 		lessonId: { type: GraphQLInt ***REMOVED***,
+		participant: { type: GraphQLBoolean ***REMOVED***,
+	***REMOVED***
+***REMOVED***);
+
+const ScheduleInputType = new GraphQLInputObjectType({
+	name:'ScheduleInput',
+	fields: {
+		id: { type: GraphQLInt ***REMOVED***,
+		year: { type: GraphQLInt ***REMOVED***,
+		week: { type: GraphQLInt ***REMOVED***,
+		taxanomyId: { type: GraphQLInt ***REMOVED***,
+		pupilId: { type: GraphQLInt ***REMOVED***,
+		lessonId: { type: GraphQLInt ***REMOVED***,
 		participant: { type: GraphQLBoolean ***REMOVED***
 	***REMOVED***
 ***REMOVED***);
 
 const PupilType = new GraphQLObjectType({
 	name:'Pupil',
+	fields: {
+		id: { type: GraphQLInt ***REMOVED***,
+		firstName: { type: GraphQLString ***REMOVED***, 
+		lastName: { type: GraphQLString ***REMOVED***,
+		conducting: { type: GraphQLInt ***REMOVED***,
+		comments: { type: GraphQLString ***REMOVED***,
+		tasks: { 
+			name:'pupiltasks',
+			type: new GraphQLList(ScheduleType),
+			resolve(parentValue) {				
+				return Schedules.findAll({
+					where: {
+						pupilId:parentValue.dataValues.id
+					***REMOVED***
+				***REMOVED***)
+			***REMOVED***
+		***REMOVED***
+	***REMOVED***
+***REMOVED***); 
+
+const PupilInputType = new GraphQLInputObjectType({
+	name:'PupilInput',
 	fields: {
 		id: { type: GraphQLInt ***REMOVED***,
 		firstName: { type: GraphQLString ***REMOVED***, 
@@ -143,14 +178,47 @@ const RootQuery = new GraphQLObjectType({
 const RootMutation = new GraphQLObjectType({
 	name:'RootMutation',
 	fields: {
+		addScheduleItem: {
+			type:ScheduleType,
+			input: {
+				type: ScheduleInputType
+			***REMOVED***,
+			resolve(parentValue, {input***REMOVED***) {
+				return Schedules.create({input***REMOVED***)
+			***REMOVED***
+		***REMOVED***,
+		updateScheduleItem: {
+			type:ScheduleType,
+			input: {
+				type: ScheduleInputType
+			***REMOVED***,
+			resolve(parentValue, {input***REMOVED***) {
+				return Schedules.create({input***REMOVED***)
+			***REMOVED***
+		***REMOVED***,
 		addPupil: {
 			type: PupilType,
-			args: {
-				firstName: { type: GraphQLString ***REMOVED***,
-				lastName: { type: GraphQLString ***REMOVED***
+			input: {
+				type: PupilInputType
 			***REMOVED***,
-			resolve(parentValue, {firstName,lastName***REMOVED***) {
-				return Pupils.create({firstName,lastName***REMOVED***)
+			resolve(parentValue, {input***REMOVED***) {
+				return Pupils.create({input***REMOVED***)
+			***REMOVED***
+		***REMOVED***,
+		updatePupil: {
+			type: PupilType,
+			args: {
+				input: {
+					type: PupilInputType
+				***REMOVED***
+			***REMOVED***,
+			resolve(parentValue,{input***REMOVED***) {
+				return Pupils.update(
+					input,
+					{ where : {id: input.id ***REMOVED*** ***REMOVED***
+				).then( (data) => {
+					return Pupils.findById(input.id).then( (data) => data)
+				***REMOVED***)
 			***REMOVED***
 		***REMOVED***,
 		deletePupil: {
