@@ -1,6 +1,7 @@
-const express = require('express')
-const expressGraphQL = require('express-graphql')
-const schema = require('./schema/schema')
+import express from 'express'
+import expressGraphQL from 'express-graphql'
+import schema from './schema/schema'
+
 const app = express()
 
 app.use('/graphql', expressGraphQL({

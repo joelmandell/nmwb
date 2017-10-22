@@ -1,10 +1,13 @@
-const graphql = require('graphql')
-const {	
+import graphql from 'graphql'
+
+import {	
 GraphQLObjectType,GraphQLString,GraphQLInt, GraphQLSchema, GraphQLList, GraphQLBoolean,
 GraphQLInputType
-***REMOVED*** = graphql
-const Sequelize = require('sequelize')
-const Settings = require('.././config.js')
+***REMOVED*** from 'graphql'
+
+import Sequelize from 'sequelize'
+import Settings from '.././config.js'
+
 
 const seq = new Sequelize(Settings.db,Settings.dbUser,Settings.dbPassword, {
 	host:Settings.host,
