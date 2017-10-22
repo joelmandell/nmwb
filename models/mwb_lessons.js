@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     ***REMOVED***
   ***REMOVED***, {
-    tableName: 'mwb_lessons'
+    tableName: 'mwb_lessons',
+    timestamps:false
   ***REMOVED***);
 ***REMOVED***;

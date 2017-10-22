@@ -17,6 +17,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     ***REMOVED***
   ***REMOVED***, {
-    tableName: 'mwb_taxanomy'
+    tableName: 'mwb_taxanomy',
+    timestamps:false
   ***REMOVED***);
 ***REMOVED***;

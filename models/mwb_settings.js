@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('mwb_congregation', {
+  return sequelize.define('mwb_settings', {
     id: {
       type: DataTypes.INTEGER(255),
       allowNull: false,
@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     ***REMOVED***,
     dayMidweekMeeting: {
-      type: DataTypes.TEXT,
+      type: DataTypes.INTEGER(1),
       allowNull: false
     ***REMOVED***,
     circuitWeek1: {
@@ -47,6 +47,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '2016-03-28'
     ***REMOVED***
   ***REMOVED***, {
-    tableName: 'mwb_congregation'
+    tableName: 'mwb_settings',
+    timestamps:false
   ***REMOVED***);
 ***REMOVED***;
