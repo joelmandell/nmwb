@@ -1,5 +1,9 @@
+# NMWB
+
+[Roadmap](https://github.com/joelmandell/nmwb/projects/1)
+
 You have to create a config.js on your own.
-------------------------------------------------
+---
 For example (all properties are mandatory):
 
 ***REMOVED***
@@ -11,5 +15,5 @@ For example (all properties are mandatory):
 ***REMOVED***
 
 Start it up:
---------------------------------------------------
+---
 npm run start
