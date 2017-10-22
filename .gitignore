@@ -1,3 +1,4 @@
 config.js
 node_modules/
 models/wp*
+package-lock.json
