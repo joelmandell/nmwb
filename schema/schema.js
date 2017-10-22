@@ -8,7 +8,6 @@ GraphQLInputType
 import Sequelize from 'sequelize'
 import Settings from '.././config.js'
 
-
 const seq = new Sequelize(Settings.db,Settings.dbUser,Settings.dbPassword, {
 	host:Settings.host,
 	dialect:Settings.dialect,
