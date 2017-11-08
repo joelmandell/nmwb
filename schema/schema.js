@@ -114,13 +114,30 @@ const SettingsType = new GraphQLObjectType({
 	***REMOVED***
 ***REMOVED***); 
 
+const UserType = new GraphQLObjectType({
+	name:'User',
+	fields: {
+		password: { type: GraphQLString***REMOVED***
+	***REMOVED***
+***REMOVED***)
+
+
+const UserInputType = new GraphQLInputObjectType({
+	name:'UserInput',
+	fields: {
+		password: { type: GraphQLString ***REMOVED***, 
+	***REMOVED***
+***REMOVED***); 
+
 const RootQuery = new GraphQLObjectType({
 	name: 'RootQueryType',
 	fields: {
 		pupil: {
 			type: PupilType,
 			args: { id: { type: GraphQLInt ***REMOVED*** ***REMOVED***,
-			resolve(parentValue, args) {
+			resolve(parentValue, args, req) {
+				console.log(req.user)
+				console.log(req)
 				return Pupils.findById(args.id).then( (data) => data)
 			***REMOVED***
 		***REMOVED***,
@@ -178,6 +195,15 @@ const RootQuery = new GraphQLObjectType({
 const RootMutation = new GraphQLObjectType({
 	name:'RootMutation',
 	fields: {
+		signin: {
+			type:UserType,
+			args: {
+				password: { type: GraphQLString ***REMOVED***
+			***REMOVED***,
+			resolve(parentValue, {password***REMOVED***) {
+				return
+			***REMOVED***
+		***REMOVED***,
 		addScheduleItem: {
 			type:ScheduleType,
 			input: {
