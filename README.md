@@ -12,6 +12,7 @@ For example (all properties are mandatory):
 	db:"mwb",
 	dbUser:"mydbuser",
 	dbPass:"mypass",
+	secret:"mysupersecret$@£$" //Secrey key for JWT.
 ***REMOVED***
 ```
 Start it up:

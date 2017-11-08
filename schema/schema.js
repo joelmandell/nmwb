@@ -2,13 +2,15 @@ import {
 GraphQLObjectType,GraphQLString,GraphQLInt, GraphQLSchema, GraphQLList, GraphQLBoolean,
 GraphQLInputObjectType
 ***REMOVED*** from 'graphql'
-
+import fs from 'fs'
 import Sequelize from 'sequelize'
-import SqlSettings from '.././config.js'
+import config from '.././config.js'
+import bcrypt from 'bcrypt'
+import j from 'jsonwebtoken'
 
-const seq = new Sequelize(SqlSettings.db,SqlSettings.dbUser,SqlSettings.dbPass, {
-	host:SqlSettings.host,
-	dialect:SqlSettings.dialect,
+const seq = new Sequelize(config.db,config.dbUser,config.dbPass, {
+	host:config.host,
+	dialect:config.dialect,
 	pool : {
 		max:20,
 		min:0,
@@ -117,17 +119,9 @@ const SettingsType = new GraphQLObjectType({
 const UserType = new GraphQLObjectType({
 	name:'User',
 	fields: {
-		password: { type: GraphQLString***REMOVED***
+		token: { type: GraphQLString***REMOVED***
 	***REMOVED***
 ***REMOVED***)
-
-
-const UserInputType = new GraphQLInputObjectType({
-	name:'UserInput',
-	fields: {
-		password: { type: GraphQLString ***REMOVED***, 
-	***REMOVED***
-***REMOVED***); 
 
 const RootQuery = new GraphQLObjectType({
 	name: 'RootQueryType',
@@ -201,7 +195,18 @@ const RootMutation = new GraphQLObjectType({
 				password: { type: GraphQLString ***REMOVED***
 			***REMOVED***,
 			resolve(parentValue, {password***REMOVED***) {
-				return
+				let data = JSON.parse(fs.readFileSync("ha.js","utf8"))
+
+				return bcrypt.compare(password,data.hash).then((res) => {
+					if(!res) return {token:null***REMOVED***
+					
+					const token = j.sign({
+						id:'1',
+						name:'admin'	
+					***REMOVED***,config.secret)
+					
+					return {token***REMOVED***
+				***REMOVED***)
 			***REMOVED***
 		***REMOVED***,
 		addScheduleItem: {
