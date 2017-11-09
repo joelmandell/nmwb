@@ -7,24 +7,24 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
-    ***REMOVED***,
+    },
     date: {
       type: DataTypes.DATE,
       allowNull: false
-    ***REMOVED***,
+    },
     pupilId: {
       type: DataTypes.INTEGER(11),
       allowNull: false
-    ***REMOVED***,
+    },
     lessonId: {
       type: DataTypes.INTEGER(11),
       allowNull: false
-    ***REMOVED***,
+    },
     metaId: {
       type: DataTypes.INTEGER(11),
       allowNull: false
-    ***REMOVED***
-  ***REMOVED***, {
+    }
+  }, {
     tableName: 'mwb_history'
-  ***REMOVED***);
-***REMOVED***;
+  });
+};

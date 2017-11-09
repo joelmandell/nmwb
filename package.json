@@ -9,7 +9,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot & babel-node server.js",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "start": "babel-node server.js"
-  ***REMOVED***,
+  },
   "dependencies": {
     "bcrypt": "^1.0.3",
     "commander": "^2.11.0",
@@ -25,7 +25,7 @@
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.14.0",
     "vue": "^2.4.4"
-  ***REMOVED***,
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
@@ -46,5 +46,5 @@
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
-  ***REMOVED***
-***REMOVED***
+  }
+}

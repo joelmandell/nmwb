@@ -7,26 +7,26 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
-    ***REMOVED***,
+    },
     firstName: {
       type: DataTypes.TEXT,
       allowNull: false
-    ***REMOVED***,
+    },
     lastName: {
       type: DataTypes.TEXT,
       allowNull: false
-    ***REMOVED***,
+    },
     conducting: {
       type: DataTypes.INTEGER(1),
       allowNull: false,
       defaultValue: '0'
-    ***REMOVED***,
+    },
     comments: {
       type: DataTypes.TEXT,
       allowNull: true
-    ***REMOVED***
-  ***REMOVED***, {
+    }
+  }, {
     tableName: 'mwb_pupils',
     timestamps:false
-  ***REMOVED***);
-***REMOVED***;
+  });
+};

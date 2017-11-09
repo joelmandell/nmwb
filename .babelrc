@@ -1,7 +1,7 @@
 {
   "presets": [
-    ["env", { "modules": false ***REMOVED***],
+    ["env", { "modules": false }],
     "stage-3",
     "es2015"
   ]
-***REMOVED***
+}
