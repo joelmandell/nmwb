@@ -7,47 +7,47 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
-    ***REMOVED***,
+    },
     year: {
       type: "YEAR(4)",
       allowNull: false
-    ***REMOVED***,
+    },
     dayMidweekMeeting: {
       type: DataTypes.INTEGER(1),
       allowNull: false
-    ***REMOVED***,
+    },
     circuitWeek1: {
       type: DataTypes.INTEGER(3),
       allowNull: false,
       defaultValue: '1'
-    ***REMOVED***,
+    },
     circuitWeek2: {
       type: DataTypes.INTEGER(3),
       allowNull: false,
       defaultValue: '2'
-    ***REMOVED***,
+    },
     cAssembly1: {
       type: DataTypes.INTEGER(3),
       allowNull: false,
       defaultValue: '3'
-    ***REMOVED***,
+    },
     cAssembly2: {
       type: DataTypes.INTEGER(3),
       allowNull: false,
       defaultValue: '4'
-    ***REMOVED***,
+    },
     regionalConvention: {
       type: DataTypes.INTEGER(3),
       allowNull: false,
       defaultValue: '5'
-    ***REMOVED***,
+    },
     memorial: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: '2016-03-28'
-    ***REMOVED***
-  ***REMOVED***, {
+    }
+  }, {
     tableName: 'mwb_settings',
     timestamps:false
-  ***REMOVED***);
-***REMOVED***;
+  });
+};

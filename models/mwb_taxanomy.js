@@ -7,17 +7,17 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
-    ***REMOVED***,
+    },
     name: {
       type: DataTypes.TEXT,
       allowNull: false
-    ***REMOVED***,
+    },
     participant: {
       type: DataTypes.INTEGER(1),
       allowNull: false
-    ***REMOVED***
-  ***REMOVED***, {
+    }
+  }, {
     tableName: 'mwb_taxanomy',
     timestamps:false
-  ***REMOVED***);
-***REMOVED***;
+  });
+};

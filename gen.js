@@ -13,13 +13,13 @@ program
         
         bcrypt.hash(pass, saltRounds, function(err, hash) {
             const fs = require('fs');
-            fs.writeFile("ha.js", `{ "hash": "${hash***REMOVED***" ***REMOVED***`, function(err) {
+            fs.writeFile("ha.js", `{ "hash": "${hash}" }`, function(err) {
                 if(err) {
                     return console.log(err);
-                ***REMOVED***
+                }
                 console.log("Generated");
-            ***REMOVED***); 
-        ***REMOVED***);
-    ***REMOVED***)
+            }); 
+        });
+    })
     
 program.parse(process.argv)

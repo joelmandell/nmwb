@@ -7,13 +7,13 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
-    ***REMOVED***,
+    },
     name: {
       type: DataTypes.TEXT,
       allowNull: false
-    ***REMOVED***
-  ***REMOVED***, {
+    }
+  }, {
     tableName: 'mwb_lessons',
     timestamps:false
-  ***REMOVED***);
-***REMOVED***;
+  });
+};
