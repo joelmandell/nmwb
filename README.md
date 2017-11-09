@@ -1,20 +1,18 @@
-# NMWB
+# nmwb
 
-[Roadmap](https://github.com/joelmandell/nmwb/projects/1)
+> UI for managing and creating schedules for \"Life as Christians\"-meeting.
 
-You have to create a config.js on your own.
----
-For example (all properties are mandatory):
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
 ```
-***REMOVED***
-	host:"localhost",
-***REMOVED***
-	db:"mwb",
-	dbUser:"mydbuser",
-	dbPass:"mypass",
-	secret:"mysupersecret$@£$" //Secrey key for JWT.
-***REMOVED***
-```
-Start it up:
----
-npm run start
+
+For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).

@@ -4,9 +4,8 @@ import schema from './schema/schema'
 import jwt from 'express-jwt'
 import fs from 'fs'
 import config from './config.js'
-const app = express()
 
-//app.use('/graphql',jwt({ secret:config.secret***REMOVED***))
+const app = express()
 
 app.use('/graphql', expressGraphQL({
 	schema,
