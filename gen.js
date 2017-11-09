@@ -3,7 +3,7 @@
 
 const program = require('commander')
 const bcrypt = require('bcrypt')
-const saltRounds = 15
+const saltRounds = 17
 
 program
     .version('0.1')
@@ -17,8 +17,7 @@ program
                 if(err) {
                     return console.log(err);
                 ***REMOVED***
-            
-                console.log("Password generated");
+                console.log("Generated");
             ***REMOVED***); 
         ***REMOVED***);
     ***REMOVED***)

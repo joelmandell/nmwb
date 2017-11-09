@@ -8,6 +8,17 @@ import config from '.././config.js'
 import bcrypt from 'bcrypt'
 import j from 'jsonwebtoken'
 
+const validate = (req) => {
+	let token = req.headers.authorization.replace('Bearer ','')
+	return j.verify(token, config.secret, function(err, decoded) {
+		if(err) return false
+		
+		return true
+	***REMOVED***);
+	
+	return false
+***REMOVED***
+
 const seq = new Sequelize(config.db,config.dbUser,config.dbPass, {
 	host:config.host,
 	dialect:config.dialect,
@@ -130,14 +141,15 @@ const RootQuery = new GraphQLObjectType({
 			type: PupilType,
 			args: { id: { type: GraphQLInt ***REMOVED*** ***REMOVED***,
 			resolve(parentValue, args, req) {
-				console.log(req.user)
-				console.log(req)
+				if(!validate(req)) return false
 				return Pupils.findById(args.id).then( (data) => data)
 			***REMOVED***
 		***REMOVED***,
 		pupils: {
 			type: new GraphQLList(PupilType),
-			resolve(parentValue) {
+			resolve(parentValue,args,req) {
+				if(!validate(req)) return false
+
 				return Pupils.findAll().then( (data) => data)
 			***REMOVED***
 		***REMOVED***,
