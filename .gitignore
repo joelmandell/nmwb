@@ -6,6 +6,7 @@ yarn-error.log
 config.js
 models/wp*
 package-lock.json
+.git/
 # Editor directories and files
 .idea
 *.suo
