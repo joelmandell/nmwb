@@ -4,6 +4,7 @@ import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
+import store from './store'
 
 const httpLink = new HttpLink({
   // You should use an absolute URL here
@@ -27,5 +28,6 @@ const apolloProvider = new VueApollo({
 new Vue({
   el: '#app',
   apolloProvider,
+  store,
   render: h => h(App)
 })
