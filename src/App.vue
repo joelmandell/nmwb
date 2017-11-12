@@ -4,12 +4,21 @@
     <p>
       This will be the interface for communicating with the API.
     </p>
+    <login></login>
   </div>
 </template>
 
 <script>
+import login from './components/Login'
+
 export default {
   name: 'app',
+  components: {
+    login,
+  },
+  created: function() {
+    console.log(this.$apollo)
+  },
   data () {
     return {
       msg: 'Welcome to MWB'
