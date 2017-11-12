@@ -4,17 +4,30 @@
     <p>
       This will be the interface for communicating with the API.
     </p>
-    <login></login>
+    <login v-if="getToken == null"></login>
+    <p v-else><button @click="signout()">Sign out</button></p>
   </div>
 </template>
 
 <script>
 import login from './components/Login'
+import {mapGetters} from 'vuex'
+import {mapActions} from 'vuex'
 
 export default {
   name: 'app',
   components: {
     login,
+  },
+  computed: {
+    ...mapGetters([
+      "getToken"
+    ])
+  },
+  methods: {
+    ...mapActions([
+      "signout"
+    ])
   },
   created: function() {
     console.log(this.$apollo)

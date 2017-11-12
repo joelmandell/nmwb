@@ -6,10 +6,13 @@
     <label><p>Password:</p>
         <input autofocus @keydown.enter="signin" type="password" />
     </label>
+    {{ getToken }}
 </div>
 </template>
 <script>
 import gql from 'graphql-tag'
+import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
     name:"login",
@@ -21,9 +24,16 @@ export default {
     created: function() {
         this.client = this.$apollo.provider.defaultClient
     },
+    computed: {
+        ...mapGetters([
+            "getToken"
+        ])
+    },
     methods: {
+        ...mapActions([
+            "setToken"
+        ]),
         signin: function(evt) {
-            console.log(this.client)
             this.client.mutate({
                 mutation: gql `
                mutation($pass:String) {
@@ -35,7 +45,10 @@ export default {
                     pass:evt.target.value
                 }
             })  
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data.data.signin.token)
+                this.setToken(data.data.signin.token)
+            })
             .catch(error => console.error(error));
         }
     },
