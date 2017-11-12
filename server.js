@@ -4,19 +4,16 @@ import schema from './schema/schema'
 import jwt from 'express-jwt'
 import fs from 'fs'
 import config from './config.js'
+import cors from 'cors'
 
 const app = express()
+app.use(cors())
 
 app.use('/graphql', expressGraphQL({
 	schema,
 	graphiql: true
 }));
 
-app.get('/', function(req,res) {
-	fs.readFile('./index.html', 'utf8', function(err, contents) {
-		res.send(contents)
-	});
-})
 app.listen(4000, () => {
 	console.log('Listening')
 });
