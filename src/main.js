@@ -5,6 +5,9 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 import store from './store'
+import $ from 'jquery'
+
+window.$ = $
 
 const httpLink = new HttpLink({
   // You should use an absolute URL here
