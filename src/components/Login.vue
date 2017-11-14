@@ -6,6 +6,7 @@
     <label><p>Password:</p>
         <input autofocus @keydown.enter="signin" type="password" />
     </label>
+    {{ loading }}
     {{ getToken }}
 </div>
 </template>
@@ -19,6 +20,7 @@ export default {
     data() {
         return  {
             client: null,
+            loading:false
         }
     },
     created: function() {
@@ -34,22 +36,23 @@ export default {
             "setToken"
         ]),
         signin: function(evt) {
+            this.$apollo.$loadingKey = this.loading
+            this.client.$loadingKey= this.loading
             this.client.mutate({
                 mutation: gql `
-               mutation($pass:String) {
-                signin(password:$pass) {
-                    token
-                }
+                mutation($pass:String) {
+                    signin(password:$pass) {
+                        token
+                    }
                 }`,
                 variables:{
                     pass:evt.target.value
-                }
+                },
             })  
             .then(data => {
-                console.log(data.data.signin.token)
                 this.setToken(data.data.signin.token)
             })
-            .catch(error => console.error(error));
+            .catch(error => this.setToken(null));
         }
     },
 }

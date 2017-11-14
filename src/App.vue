@@ -1,11 +1,39 @@
 <template>
   <div id="app">
-    <h1>{{ msg }}</h1>
-    <p>
-      This will be the interface for communicating with the API.
-    </p>
-    <login v-if="getToken == null"></login>
-    <p v-else><button @click="signout()">Sign out</button></p>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text">Site Title</li>
+          <li>
+            <a href="#">One</a>
+            <ul class="menu vertical">
+              <li><a href="#">One</a></li>
+              <li><a href="#">Two</a></li>
+              <li><a href="#">Three</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Two</a></li>
+          <li><a href="#">Three</a></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li><input type="search" placeholder="Search"></li>
+          <li><button type="button" class="button">Search</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="columns small-12">
+        <h1>{{ msg }}</h1>
+        <p>
+          This will be the interface for communicating with the API.
+        </p>
+        <login v-if="getToken == null"></login>
+        <p v-else><button @click="signout()">Sign out</button></p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -13,6 +41,14 @@
 import login from './components/Login'
 import {mapGetters} from 'vuex'
 import {mapActions} from 'vuex'
+import $ from 'jquery'
+
+import { Foundation } from 'foundation-sites/js/foundation.core';
+import { Dropdown } from 'foundation-sites/js/foundation.dropdown';
+import { Box } from 'foundation-sites/js/foundation.util.box';
+import { Triggers } from 'foundation-sites/js/foundation.util.triggers';
+
+
 
 export default {
   name: 'app',
@@ -29,8 +65,14 @@ export default {
       "signout"
     ])
   },
+  mounted: function() {
+Foundation.addToJquery($)
+Foundation.Dropdown = Dropdown
+Triggers.init($, Foundation);
+Foundation.plugin(Dropdown, 'Dropdown');
+  },
   created: function() {
-    console.log(this.$apollo)
+    console.log(Foundation)
   },
   data () {
     return {

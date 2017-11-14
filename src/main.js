@@ -15,14 +15,13 @@ const httpLink = new HttpLink({
 const apolloClient = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),
-  connectToDevTools: true,
 })
 
 // Install the vue plugin
 Vue.use(VueApollo)
 
 const apolloProvider = new VueApollo({
-  defaultClient: apolloClient,
+  defaultClient: apolloClient
 })
 
 new Vue({

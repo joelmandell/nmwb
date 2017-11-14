@@ -1,6 +1,6 @@
 import {	
 GraphQLObjectType,GraphQLString,GraphQLInt, GraphQLSchema, GraphQLList, GraphQLBoolean,
-GraphQLInputObjectType
+GraphQLInputObjectType, GraphQLException
 } from 'graphql'
 import fs from 'fs'
 import Sequelize from 'sequelize'
@@ -208,9 +208,9 @@ const RootMutation = new GraphQLObjectType({
 			},
 			resolve(parentValue, {password}) {
 				let data = JSON.parse(fs.readFileSync("ha.js","utf8"))
-
+					GraphQLString
 				return bcrypt.compare(password,data.hash).then((res) => {
-					if(!res) return {token:null}
+					if(!res)	throw "Wrong credentials"
 					
 					const token = j.sign({
 						id:'1',
