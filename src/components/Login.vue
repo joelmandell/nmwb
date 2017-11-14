@@ -25,6 +25,7 @@ export default {
     },
     created: function() {
         this.client = this.$apollo.provider.defaultClient
+        
     },
     computed: {
         ...mapGetters([
@@ -51,6 +52,9 @@ export default {
             })  
             .then(data => {
                 this.setToken(data.data.signin.token)
+                $(document).ready( function() {
+                    $(document).foundation()
+                })
             })
             .catch(error => this.setToken(null));
         }
