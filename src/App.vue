@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-      <div class="grid-container">
-        <div class="top-bar" id="topBar">
+    <div class="grid-container full">
+      <div class="top-bar" id="topBar">
           <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
               <li class="menu-text">MWB</li>
@@ -23,7 +23,8 @@
             </ul>
           </div>
         </div>
-
+      </div>
+      <div class="grid-container">
         <div class="grid-x">
           <div class="small-6 cell">
             <h1>{{ msg }}</h1>
