@@ -5,8 +5,8 @@
           <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
               <li class="menu-text">MWB</li>
-              <li v-if="getToken != null">
-                <a href="#">One</a>
+              <li v-show="getToken != null">
+                <a href="#">Pupils</a>
                 <ul class="menu vertical">
                   <li><a href="#">One</a></li>
                   <li><a href="#">Two</a></li>
@@ -17,7 +17,7 @@
             </ul>
           </div>
           <div class="top-bar-right">
-            <ul class="menu">
+            <ul class="menu" v-if="getToken != null">
               <li><input type="search" placeholder="Search"></li>
               <li><button type="button" class="button">Search</button></li>
             </ul>
@@ -40,7 +40,7 @@
             <p v-else><button @click="signout()">Sign out</button></p>
           </div>
           <div class="small-6 cell">
-
+            <router-view></router-view>
           </div>
       
         </div>
@@ -74,8 +74,7 @@ export default {
 },
   created: function() {
     $(document).ready( function() {
-      $(document).foundation()
-    })
+$("#topBar").foundation()    })
   },
   data () {
     return {
