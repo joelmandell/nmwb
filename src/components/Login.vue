@@ -37,8 +37,6 @@ export default {
             "setToken"
         ]),
         signin: function(evt) {
-            this.$apollo.$loadingKey = this.loading
-            this.client.$loadingKey= this.loading
             this.client.mutate({
                 mutation: gql `
                 mutation($pass:String) {
@@ -52,9 +50,7 @@ export default {
             })  
             .then(data => {
                 this.setToken(data.data.signin.token)
-                $(document).ready( function() {
-                    $(document).foundation()
-                })
+
             })
             .catch(error => this.setToken(null));
         }

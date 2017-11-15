@@ -6,6 +6,17 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 import store from './store'
 import $ from 'jquery'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
+const routes = [
+	{ path: '/',  component: { template: "<h1>TEST</h1>"}},
+]
+
+const router = new VueRouter({
+    routes,
+})
 
 window.$ = $
 
@@ -27,9 +38,10 @@ const apolloProvider = new VueApollo({
   defaultClient: apolloClient
 })
 
-new Vue({
-  el: '#app',
+const app = new Vue({
+  el:"#app",
   apolloProvider,
+  router,
   store,
-  render: h => h(App)
+  render: h => h(App)  
 })
