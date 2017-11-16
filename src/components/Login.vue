@@ -1,14 +1,17 @@
 <template>
-<div>
-    <label><p>Username:</p>
-        <input type="text" value="admin" />
-    </label>
-    <label><p>Password:</p>
-        <input autofocus @keydown.enter="signin" type="password" />
-    </label>
-    {{ loading }}
-    {{ getToken }}
-</div>
+    <div>
+        <div v-if="getToken == null">
+            <label><p>Username:</p>
+                <input type="text" value="admin" />
+            </label>
+            <label><p>Password:</p>
+                <input autofocus @keydown.enter="signin" type="password" />
+            </label>
+        </div>
+        <div v-else>
+            <button class="primary small button" @click="signout()">Sign out</button>
+        </div>        
+    </div>
 </template>
 <script>
 import gql from 'graphql-tag'

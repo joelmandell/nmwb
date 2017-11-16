@@ -35,30 +35,21 @@
           <div class="small-6 cell"></div>
         </div>
         <div class="grid-x">
-          <div class="small-6 cell">
-            <login v-if="getToken == null"></login>
-            <p v-else><button @click="signout()">Sign out</button></p>
-          </div>
-          <div class="small-6 cell">
+          <div class="small-12 cell">
             <router-view></router-view>
           </div>
-      
         </div>
       </div>
   </div>
 </template>
 
 <script>
-import login from './components/Login'
 import {mapGetters} from 'vuex'
 import {mapActions} from 'vuex'
 import foundation from 'foundation-sites'
 
 export default {
   name: 'app',
-  components: {
-    login,
-  },
   computed: {
     ...mapGetters([
       "getToken"
@@ -70,8 +61,10 @@ export default {
     ])
   },
   mounted: function() {
-
-},
+    if(this.getToken == null) {
+      this.$router.push("login")
+    }
+  },
   created: function() {
     $(document).ready( function() {
 $("#topBar").foundation()    })
