@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         ...mapActions([
-            "setToken"
+            "setToken","signout"
         ]),
         signin: function(evt) {
             this.client.mutate({
