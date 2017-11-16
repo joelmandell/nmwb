@@ -7,11 +7,13 @@ import VueApollo from 'vue-apollo'
 import store from './store'
 import $ from 'jquery'
 import VueRouter from 'vue-router'
+import Login from './components/Login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-	{ path: '/',  component: { template: "<h1>TEST</h1>"}},
+  { path: '/',  component: { template: "<h1>TEST</h1>"}},
+  { path: '/login', component: Login }
 ]
 
 const router = new VueRouter({
