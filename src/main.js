@@ -8,6 +8,7 @@ import store from './store'
 import $ from 'jquery'
 import VueRouter from 'vue-router'
 import Login from './components/Login.vue'
+import {mapActions} from 'vuex'
 
 Vue.use(VueRouter)
 
@@ -45,5 +46,21 @@ const app = new Vue({
   apolloProvider,
   router,
   store,
+  methods: {
+    ...mapActions([
+      "getToken"
+    ])
+  },
+  created: function() {
+    let self = this
+    console.log(self.getToken)
+    if(self.getToken == null) {
+      self.$router.push("login")
+    }  
+    $(document).ready( function() {
+      $("#topBar").foundation()    
+        
+    })
+  },
   render: h => h(App)  
 })

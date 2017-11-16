@@ -4,16 +4,18 @@
       <div class="top-bar" id="topBar">
           <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
-              <li class="menu-text">MWB</li>
-              <li v-show="getToken != null">
-                <a href="#">Pupils</a>
-                <ul class="menu vertical">
-                  <li><a href="#">One</a></li>
-                  <li><a href="#">Two</a></li>
-                  <li><a href="#">Three</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Two</a></li>
+              <li><router-link class="menu-text" to="/">MWB</router-link></li>
+              
+                <li v-show="getToken != null">
+                  <a href="#">Pupils</a>
+                  <ul class="menu vertical">
+                    <li><a href="#">One</a></li>
+                    <li><a href="#">Two</a></li>
+                    <li><a href="#">Three</a></li>
+                  </ul>
+                </li>
+                <li v-show="getToken != null"><router-link to="/login">Sign out</router-link></li>
+              
             </ul>
           </div>
           <div class="top-bar-right">
@@ -55,19 +57,12 @@ export default {
       "getToken"
     ])
   },
-  methods: {
-    ...mapActions([
-      "signout"
-    ])
-  },
+
   mounted: function() {
-    if(this.getToken == null) {
-      this.$router.push("login")
-    }
+
   },
   created: function() {
-    $(document).ready( function() {
-$("#topBar").foundation()    })
+    
   },
   data () {
     return {
