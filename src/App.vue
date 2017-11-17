@@ -7,14 +7,14 @@
               <li><router-link class="menu-text" to="/">MWB</router-link></li>
               
                 <li v-show="getToken != null">
-                  <a href="#">Pupils</a>
+                  <router-link to="/pupils">Pupils</router-link>
                   <ul class="menu vertical">
                     <li><a href="#">One</a></li>
                     <li><a href="#">Two</a></li>
                     <li><a href="#">Three</a></li>
                   </ul>
                 </li>
-                <li v-show="getToken != null"><router-link to="/login">Sign out</router-link></li>
+                <li v-show="getToken != null"><router-link to="/" @click.native="signout">Sign out</router-link></li>
               
             </ul>
           </div>
@@ -33,13 +33,12 @@
           </div>
         </div>
       </div>
-      <div class="grid-container">
-        <div class="grid-x">
-          <div class="small-12 cell">
-            <router-view></router-view>
-          </div>
+      <div class="grid-x grid-margin-x grid-padding-x">
+        <div class="small-12 cell">
+          <router-view></router-view>
         </div>
       </div>
+
   </div>
 </template>
 
@@ -55,7 +54,11 @@ export default {
       "getToken"
     ])
   },
-
+  methods: {
+    ...mapActions(
+      ["signout"]
+    )
+  },
   mounted: function() {
 
   },
