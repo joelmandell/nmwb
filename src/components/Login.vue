@@ -17,6 +17,9 @@
 import gql from 'graphql-tag'
 import { mapGetters } from 'vuex'
 import { mapActions } from 'vuex'
+import { setContext } from "apollo-link-context";
+
+
 
 export default {
     name:"login",

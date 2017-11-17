@@ -28,14 +28,12 @@
       </div>
       <div class="grid-container">
         <div class="grid-x">
-          <div class="small-6 cell">
-            <h1>{{ msg }}</h1>
-            <p>
-              This will be the interface for communicating with the API.
-            </p>
+          <div class="small-12 cell">
+            <br />
           </div>
-          <div class="small-6 cell"></div>
         </div>
+      </div>
+      <div class="grid-container">
         <div class="grid-x">
           <div class="small-12 cell">
             <router-view></router-view>
