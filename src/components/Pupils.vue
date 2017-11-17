@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p v-for="p in pupils">{{ p.firstName }}</p>
+        <p v-for="p in pupils">{{ p.firstName }} {{ p.lastName }}</p>
     </div>
 </template>
 

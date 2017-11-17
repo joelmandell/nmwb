@@ -8,9 +8,6 @@
                 <input autofocus @keydown.enter="signin" type="password" />
             </label>
         </div>
-        <div v-else>
-            <button class="primary small button" @click="signout()">Sign out</button>
-        </div>        
     </div>
 </template>
 <script>
@@ -40,7 +37,7 @@ export default {
     },
     methods: {
         ...mapActions([
-            "setToken","signout"
+            "setToken"
         ]),
         signin: function(evt) {
             this.client.mutate({

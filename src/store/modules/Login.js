@@ -9,6 +9,7 @@ const getters = {
 const mutations = {
     setToken: (state,token) => {
         state.token = token
+        location.reload()
     },
 }
 
