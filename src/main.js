@@ -8,13 +8,15 @@ import store from './store'
 import $ from 'jquery'
 import VueRouter from 'vue-router'
 import Login from './components/Login.vue'
+import Pupils from './components/Pupils.vue'
 import {mapActions} from 'vuex'
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/',  component: { template: "<h1>TEST</h1>"}},
-  { path: '/login', component: Login }
+  { path: '/login', component: Login },
+  { path: '/pupils', component: Pupils }
 ]
 
 const router = new VueRouter({
@@ -26,6 +28,9 @@ window.$ = $
 const httpLink = new HttpLink({
   // You should use an absolute URL here
   uri: 'http://localhost:4000/graphql/',
+  headers: {
+    authorization:"Bearer " + store._wrappedGetters.getToken(store)
+  }
 })
 
 // Create the apollo client
@@ -41,6 +46,9 @@ const apolloProvider = new VueApollo({
   defaultClient: apolloClient
 })
 
+/*
+ */
+
 const app = new Vue({
   el:"#app",
   apolloProvider,
@@ -53,12 +61,12 @@ const app = new Vue({
   },
   created: function() {
     let self = this
-    console.log(self.getToken)
+    
     if(self.getToken == null) {
       self.$router.push("login")
     }  
     $(document).ready( function() {
-      $("#topBar").foundation()    
+      $(document).foundation()    
         
     })
   },
