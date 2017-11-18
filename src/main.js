@@ -9,6 +9,7 @@ import $ from 'jquery'
 import VueRouter from 'vue-router'
 import Login from './components/Login.vue'
 import Pupils from './components/Pupils.vue'
+import Pupil from './components/Pupil.vue'
 import {mapActions} from 'vuex'
 
 Vue.use(VueRouter)
@@ -16,7 +17,11 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/',  component: { template: "<h1>TEST</h1>"}},
   { path: '/login', component: Login },
-  { path: '/pupils', component: Pupils }
+  { path: '/pupils', component: Pupils,
+    children: [
+      { path: '/pupils/:id', component: Pupil },
+    ]
+  }
 ]
 
 const router = new VueRouter({

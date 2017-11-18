@@ -1,6 +1,9 @@
 <template>
     <div>
-        <p v-for="p in pupils">{{ p.firstName }} {{ p.lastName }}</p>
+        <router-link v-for="p in pupils" :to='"/pupils/"+p.id'>
+            <p>{{ p.firstName }} {{ p.lastName }}</p>
+        </router-link>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -19,6 +22,7 @@ export default {
             query:gql`
             {
                 pupils {
+                    id
                     firstName
                     lastName
                     conducting
