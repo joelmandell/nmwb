@@ -24,7 +24,17 @@ module.exports = function(sequelize, DataTypes) {
     comments: {
       type: DataTypes.TEXT,
       allowNull: true
-    }
+    },
+    woman: {
+      type: DataTypes.INTEGER(1),
+      allowNull: false,
+      defaultValue: '0'
+    },
+    appointed: {
+      type: DataTypes.INTEGER(1),
+      allowNull: false,
+      defaultValue: '0'
+    },
   }, {
     tableName: 'mwb_pupils',
     timestamps:false

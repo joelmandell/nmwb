@@ -1,9 +1,9 @@
 <template>
     <div>
+        <router-view></router-view>
         <p v-for="p in pupils" >
             <router-link :to='"/pupils/"+p.id'>{{ p.firstName }} {{ p.lastName }}</router-link>
         </p>        
-        <router-view></router-view>
     </div>
 </template>
 

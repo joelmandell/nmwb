@@ -123,7 +123,7 @@ const SettingsType = new GraphQLObjectType({
 		cAssembly1: { type: GraphQLInt },
 		cAssembly2: { type: GraphQLInt },
 		regionalConvention: { type: GraphQLInt },
-		memorial: { type: GraphQLInt },
+		memorial: { type: GraphQLString },
 	}
 }); 
 
