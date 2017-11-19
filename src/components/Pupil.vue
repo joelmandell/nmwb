@@ -1,11 +1,30 @@
 <template>
     <div>
-        <modal @closed="closed" :scrollable="true" :min-height="400" :resizable="true" :adaptive="true" name="pupil">
+        <modal height="auto" @closed="closed" :scrollable="true" :resizable="true" :adaptive="true" name="pupil">
                 <div class="grid-x grid-margin-x grid-padding-x">
-                    <div class="small-12 cell">
+                    <div v-if="typeof pupil != 'undefined'" class="small-12 cell">
+                        <br />
                         <h3>Edit pupil</h3>
-                        <label v-for="p in pupil">
-                            <input type="text" :value="p" />    
+                        <label>
+                            Firstname:
+                            <input type="text" v-model="pupil.firstName" />    
+                        </label>
+                        <label>
+                            Lastname:
+                            <input type="text" v-model="pupil.lastName" />    
+                        </label>
+                        <label>
+                            Conducting:
+                            <select v-model="pupil.conducting">
+                                <option value="1">YES</option>
+                                <option value="0">NO</option>
+                            </select>
+                        </label>
+                        <label>
+                            Comments:
+                            <textarea v-model="pupil.comments">    
+
+                            </textarea>
                         </label>
                     </div>
                 </div>
@@ -16,13 +35,15 @@
 import Vue from 'vue'
 import VModal from 'vue-js-modal'
 import gql from 'graphql-tag'
+import {cloneDeep} from 'lodash'
 
 Vue.use(VModal)
 export default {
     data() {
         return {
-            pupil:null,
-            id:0
+            pupil:[],
+            id:0,
+            client:null
         }
     },
     methods: {
@@ -30,20 +51,55 @@ export default {
             this.$router.go(-1)
         }
     },
+    beforeRouteLeave (to, from, next) {
+        delete this.pupil["__typename"]
+
+        this.client.mutate({
+                mutation: gql`mutation ($pupil: PupilInput) {
+                    updatePupil(input:$pupil) {
+                        id
+                        firstName
+                        lastName
+                        conducting
+                        comments
+                    }
+                }`,
+                // Parameters
+                variables: {
+                    pupil: this.pupil,
+                },
+                update: (store, { data }) => {
+                    console.log(data)
+                },
+                optimisticResponse: {
+
+                },
+                }).then((data) => {
+                    // Result
+                    next()
+                }).catch((error) => {
+                    console.log("FEL")
+                    console.error(error)
+                    // We restore the initial user input
+        })                
+    },
+    beforeRouteUpdate (to, from, next) {
+        this.client = this.$apollo.provider.defaultClient
+        this.$modal.show("pupil")
+        //next()
+    },
     created: function() {
-        console.log(this.$route.params.id)
-        console.log(this.$modal)
-        this.id = this.$route.params.id
+        this.client = this.$apollo.provider.defaultClient
         this.$nextTick(() => {
             this.$modal.show("pupil")
         })
-        
     },
-     apollo: {
+    apollo: {
         pupil: {
             query:gql`
             query ($id:Int) {
                 pupil(id:$id) {
+                    id
                     firstName
                     lastName
                     conducting
@@ -54,6 +110,9 @@ export default {
                 return {
                     id:this.$route.params.id
                 }
+            },
+            result({ data, loader, networkStatus }) {
+                this.pupil = cloneDeep(data.pupil)
             }
         }
     }
