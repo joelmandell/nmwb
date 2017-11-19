@@ -5,27 +5,30 @@
                     <div v-if="typeof pupil != 'undefined'" class="small-12 cell">
                         <br />
                         <h3>Edit pupil</h3>
+                        <p><strong>{{ $t("message.saved_automatically") }}</strong></p>
                         <label>
-                            Firstname:
+                            {{ $t("label.firstName") }}:
                             <input type="text" v-model="pupil.firstName" />    
                         </label>
                         <label>
-                            Lastname:
+                            {{ $t("label.lastName") }}:
                             <input type="text" v-model="pupil.lastName" />    
                         </label>
                         <label>
-                            Conducting:
+                            {{ $t("label.conducting") }}:
                             <select v-model="pupil.conducting">
                                 <option value="1">YES</option>
                                 <option value="0">NO</option>
                             </select>
                         </label>
                         <label>
-                            Comments:
-                            <textarea v-model="pupil.comments">    
+                            {{ $t("label.comments") }}:
+                            <textarea rows="7" v-model="pupil.comments">    
 
                             </textarea>
                         </label>
+                        <button @click="remove" class="button alert">Delete</button>
+                        <p><strong>{{ $t("message.saved_automatically") }}</strong></p>
                     </div>
                 </div>
         </modal>
@@ -49,6 +52,38 @@ export default {
     methods: {
         closed: function() {
             this.$router.go(-1)
+        },
+        remove: function() {
+            let self = this
+
+            this.$dialog.confirm('Please confirm to continue')
+            .then(function () {               
+                self.client.mutate({
+                mutation: gql`mutation ($id: Int!) {
+                                    deletePupil(id:$id) {
+                                        id
+                                    }
+                                }`,
+                                // Parameters
+                                variables: {
+                                    id:self.$route.params.id,
+                                },
+                                update: (store, { data }) => {
+                                    console.log(data)
+                                },
+                                optimisticResponse: {
+
+                            },
+                }).then((data) => {
+                    // Result
+                    self.$router.go(-1)
+                }).catch((error) => {
+                    console.error(error)
+                })                
+            })
+            .catch(function () {
+                console.log('Clicked on cancel')
+            });
         }
     },
     beforeRouteLeave (to, from, next) {

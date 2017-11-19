@@ -7,12 +7,17 @@
               <li><router-link class="menu-text" to="/">MWB</router-link></li>
               
                 <li v-show="getToken != null">
-                  <router-link to="/pupils">Pupils</router-link>
-                  <ul class="menu vertical">
+                  <router-link to="/pupils"> {{ $t("menu.pupils") }}</router-link>
+                  <!-- <ul class="menu vertical">
                     <li><a href="#">One</a></li>
                     <li><a href="#">Two</a></li>
                     <li><a href="#">Three</a></li>
-                  </ul>
+                  </ul> -->
+                </li>
+                <li v-show="getToken != null">
+                  <router-link to="/settings">
+                    {{ $t("menu.settings") }}
+                  </router-link>
                 </li>
                 <li v-show="getToken != null"><router-link to="/" @click.native="signout">Sign out</router-link></li>
               

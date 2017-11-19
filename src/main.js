@@ -8,15 +8,22 @@ import store from './store'
 import $ from 'jquery'
 import VueRouter from 'vue-router'
 import Login from './components/Login.vue'
+import Settings from './components/Settings.vue'
 import Pupils from './components/Pupils.vue'
 import Pupil from './components/Pupil.vue'
 import {mapActions} from 'vuex'
+import langs from './langs/'
+import VuejsDialog from "vuejs-dialog"
 
+const i18n = langs.i18n
+
+Vue.use(VuejsDialog)
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/',  component: { template: "<h1>TEST</h1>"}},
   { path: '/login', component: Login },
+  { path: '/settings', component: Settings },
   { path: '/pupils', component: Pupils,
     children: [
       { path: '/pupils/:id', component: Pupil },
@@ -42,7 +49,7 @@ const httpLink = new HttpLink({
 const apolloClient = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),
-  
+
 })
 
 // Install the vue plugin
@@ -60,6 +67,7 @@ const app = new Vue({
   apolloProvider,
   router,
   store,
+  i18n,
   methods: {
     ...mapActions([
       "getToken"
