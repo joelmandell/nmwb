@@ -1,8 +1,9 @@
 <template>
     <div>
         <router-view></router-view>
+        <button class="primary button"><router-link style="color:#fff" to="/pupils/add">Add new</router-link></button>
         <p v-for="p in pupils" >
-            <router-link :to='"/pupils/"+p.id'>{{ p.firstName }} {{ p.lastName }}</router-link>
+            <router-link :to='"/pupils/edit/"+p.id'>{{ p.firstName }} {{ p.lastName }}</router-link>
         </p>        
     </div>
 </template>

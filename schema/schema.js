@@ -241,11 +241,14 @@ const RootMutation = new GraphQLObjectType({
 		},
 		addPupil: {
 			type: PupilType,
-			input: {
-				type: PupilInputType
+			args: {
+				pupil: {
+					type: PupilInputType
+				}
 			},
-			resolve(parentValue, {input}) {
-				return Pupils.create({input})
+			resolve(parentValue, {pupil}) {
+				console.log(pupil)
+				return Pupils.create(pupil)
 			}
 		},
 		updatePupil: {
