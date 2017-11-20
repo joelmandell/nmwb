@@ -11,6 +11,7 @@ import Login from './components/Login.vue'
 import Settings from './components/Settings.vue'
 import Pupils from './components/Pupils.vue'
 import Pupil from './components/Pupil.vue'
+import AddPupil from './components/AddPupil.vue'
 import {mapActions} from 'vuex'
 import langs from './langs/'
 import VuejsDialog from "vuejs-dialog"
@@ -26,7 +27,8 @@ const routes = [
   { path: '/settings', component: Settings },
   { path: '/pupils', component: Pupils,
     children: [
-      { path: '/pupils/:id', component: Pupil },
+      { path: 'edit/:id', component: Pupil },
+      { path: 'add', component: AddPupil }
     ]
   }
 ]

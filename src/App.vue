@@ -62,7 +62,20 @@ export default {
   methods: {
     ...mapActions(
       ["signout"]
-    )
+    ),
+    authed: function()
+    {
+      if(this.getToken == null)
+      {
+        console.log("WOOO")
+        this.$router.push("/login")
+      } else {
+        console.log("NOT")
+      }
+    }
+  },
+  watch: {
+    '$route': 'authed'
   },
   mounted: function() {
 
