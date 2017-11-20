@@ -26,7 +26,7 @@
 
                             </textarea>
                         </label>
-                        {{ pupil }}
+
                         <button class="primary button" @click="add">Add pupil</button>
                     </div>
                 </div>
@@ -47,8 +47,18 @@ export default {
                 firstName:'',
                 lastName:'',
                 conducting:0,
-                comments:''
+                comments:'',
             },
+            query: gql`
+                        {
+                            pupils {
+                                id
+                                firstName
+                                lastName
+                                conducting
+                                comments
+                            }  
+                        }` 
         }
     },
     beforeRouteUpdate (to, from, next) {
@@ -66,11 +76,14 @@ export default {
         closed: function() {
             this.$router.go(-1)
         },
-        add: function() {
+        add() {
+            const pupil = this.pupil
+
             this.client.mutate({
                 mutation: gql`
                     mutation($pupil:PupilInput) {
                         addPupil(pupil:$pupil) {
+                            id
                             firstName
                             lastName
                             conducting
@@ -80,7 +93,15 @@ export default {
                 `,
                 variables: {
                     pupil:this.pupil
+                },
+                update: (store, {data: {addPupil}}) => {
+                    const dat = store.readQuery({query:this.query})
+                    dat.pupils.push(addPupil)
+                    store.writeQuery({query:this.query,data:dat})
                 }
+            }).then( (data) => {
+                this.$modal.hide("pupil")
+                this.$router.go(-1)
             })
         }
     },
