@@ -46,7 +46,17 @@ export default {
         return {
             pupil:[],
             id:0,
-            client:null
+            client:null,
+                query:gql`
+            query {
+                pupils {
+                    id
+                    firstName
+                    lastName
+                    conducting
+                    comments
+                }  
+            }`,
         }
     },
     methods: {
@@ -70,6 +80,7 @@ export default {
                                 },
                                 update: (store, { data }) => {
                                     console.log(data)
+                                    console.log(store)
                                 },
                                 optimisticResponse: {
 
@@ -103,8 +114,19 @@ export default {
                 variables: {
                     pupil: this.pupil,
                 },
-                update: (store, { data }) => {
-                    console.log(data)
+                update: (store, { data: {updatePupil} }) => {
+                    let dat = store.readQuery({query:this.query})
+
+                    if(typeof updatePupil == 'undefined') return
+                    dat.pupils = dat.pupils.map( (f) => {
+                        if(f.id == updatePupil.id)    
+                        {
+                            
+                            f = updatePupil
+                        }
+                        return f
+                    })
+                    store.writeQuery({query:this.query,data:dat})
                 },
                 optimisticResponse: {
 
@@ -115,6 +137,7 @@ export default {
                 }).catch((error) => {
                     console.log("FEL")
                     console.error(error)
+                    
                     // We restore the initial user input
         })                
     },

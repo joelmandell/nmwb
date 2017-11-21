@@ -273,7 +273,7 @@ const RootMutation = new GraphQLObjectType({
 				id: { type:GraphQLInt }
 			},
 			resolve(parentValue, {id}) {
-				Pupils.destroy({ 
+				return Pupils.destroy({ 
 					where: {
 						id
 					}
