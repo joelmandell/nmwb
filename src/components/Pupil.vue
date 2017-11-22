@@ -61,7 +61,7 @@ export default {
     },
     methods: {
         closed: function() {
-            this.$router.go(-1)
+            this.$router.push("/pupils")
         },
         remove: function() {
             let self = this
@@ -78,16 +78,31 @@ export default {
                                 variables: {
                                     id:self.$route.params.id,
                                 },
-                                update: (store, { data }) => {
-                                    console.log(data)
-                                    console.log(store)
+                                update: (store, { data: {deletePupil} }) => {
+                                    let dat = store.readQuery({query:self.query})
+
+                                    console.log(self.$route.params.id)
+                                    if(typeof deletePupil == 'undefined') return
+
+                                    // const index = dat.pupils.findIndex( (f) => f.id == self.$route.params.id)
+                                    // console.log(index)
+                                    // let ne = null
+                                    // if(index > -1)
+                                    // {
+                                    //     dat.pupils = dat.pupils.splice(index,1)
+                                    // }
+
+                                    store.writeQuery({query:self.query,data:dat.pupils.filter((f) => f.id != self.$route.params.id)})
                                 },
                                 optimisticResponse: {
 
                             },
                 }).then((data) => {
                     // Result
-                    self.$router.go(-1)
+                    console.log("IN THEN DATA")
+                    //self.modal.$hide("pupil")
+                   self.$router.go(-1)
+                   window.location.refresh()
                 }).catch((error) => {
                     console.error(error)
                 })                
