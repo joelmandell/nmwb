@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="grid-container full">
+    <div class="grid-container full"  style="position:fixed; width:100%;">
       <div class="top-bar" id="topBar">
           <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
@@ -31,14 +31,14 @@
           </div>
         </div>
       </div>
-      <div class="grid-container">
+      <div class="grid-container" >
         <div class="grid-x">
           <div class="small-12 cell">
             <br />
           </div>
         </div>
       </div>
-      <div class="grid-x grid-margin-x grid-padding-x">
+      <div class="grid-x grid-margin-x grid-padding-x" style="margin-top:2.5em;">
         <div class="small-12 cell">
           <router-view></router-view>
         </div>
