@@ -70,6 +70,7 @@ const PupilType = new GraphQLObjectType({
 		lastName: { type: GraphQLString },
 		conducting: { type: GraphQLInt },
 		comments: { type: GraphQLString },
+		woman: { type: GraphQLBoolean },
 		tasks: { 
 			name:'pupiltasks',
 			type: new GraphQLList(ScheduleType),
@@ -91,7 +92,8 @@ const PupilInputType = new GraphQLInputObjectType({
 		firstName: { type: GraphQLString }, 
 		lastName: { type: GraphQLString },
 		conducting: { type: GraphQLInt },
-		comments: { type: GraphQLString }
+		comments: { type: GraphQLString },
+		woman: { type: GraphQLBoolean }
 	}
 }); 
 
