@@ -5,7 +5,6 @@
           <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
               <li><router-link class="menu-text" to="/">MWB</router-link></li>
-              
                 <li v-show="getToken != null">
                   <router-link to="/pupils"> {{ $t("menu.pupils") }}</router-link>
                   <!-- <ul class="menu vertical">
@@ -20,7 +19,6 @@
                   </router-link>
                 </li>
                 <li v-show="getToken != null"><router-link to="/" @click.native="signout">Sign out</router-link></li>
-              
             </ul>
           </div>
           <div class="top-bar-right">
@@ -43,7 +41,6 @@
           <router-view></router-view>
         </div>
       </div>
-
   </div>
 </template>
 

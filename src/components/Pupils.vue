@@ -28,6 +28,7 @@ export default {
                     lastName
                     conducting
                     comments
+                    woman
                 }  
             }`        
         }

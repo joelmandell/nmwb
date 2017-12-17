@@ -14,3 +14,4 @@ package-lock.json
 *.njsproj
 *.sln
 ha.js
+yarn.lock

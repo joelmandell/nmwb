@@ -27,6 +27,9 @@
 
                             </textarea>
                         </label>
+                        <label>Woman:
+                            <input type="checkbox" v-model="pupil.woman" />
+                        </label>
                         <button @click="remove" class="button alert">Delete</button>
                         <p><strong>{{ $t("message.saved_automatically") }}</strong></p>
                     </div>
@@ -46,17 +49,7 @@ export default {
         return {
             pupil:[],
             id:0,
-            client:null,
-                query:gql`
-            query {
-                pupils {
-                    id
-                    firstName
-                    lastName
-                    conducting
-                    comments
-                }  
-            }`,
+            client:null
         }
     },
     methods: {
@@ -102,7 +95,6 @@ export default {
                     console.log("IN THEN DATA")
                     //self.modal.$hide("pupil")
                    self.$router.go(-1)
-                   window.location.refresh()
                 }).catch((error) => {
                     console.error(error)
                 })                
@@ -113,8 +105,7 @@ export default {
         }
     },
     beforeRouteLeave (to, from, next) {
-        delete this.pupil["__typename"]
-
+        console.log("BEFORE CALLING MUTATE ON CLIENT:")
         this.client.mutate({
                 mutation: gql`mutation ($pupil: PupilInput) {
                     updatePupil(input:$pupil) {
@@ -123,38 +114,85 @@ export default {
                         lastName
                         conducting
                         comments
+                        woman
                     }
                 }`,
                 // Parameters
                 variables: {
                     pupil: this.pupil,
                 },
-                update: (store, { data: {updatePupil} }) => {
-                    let dat = store.readQuery({query:this.query})
+                update: (store, {data: {updatePupil} }) => {
 
-                    if(typeof updatePupil == 'undefined') return
-                    dat.pupils = dat.pupils.map( (f) => {
-                        if(f.id == updatePupil.id)    
+                    const query = gql `query ($id:Int) {
+                        pupil(id:$id) {
+                            id
+                            firstName
+                            lastName
+                            conducting
+                            comments
+                            woman
+                        }
+                    }
+                    `
+                    const data1 = store.readQuery({
+                        query,
+                        variables: {
+                            id:this.$route.params.id
+                        },
+                    })
+                 
+                    data1.pupil = updatePupil
+
+                    store.writeQuery({
+                        query,
+                        data:data1,
+                        variables: {
+                            id:this.$route.params.id
+                        }
+                    })
+
+                    const allPupilsQuery =  gql`
+                            {
+                                pupils {
+                                    id
+                                    firstName
+                                    lastName
+                                    conducting
+                                    comments
+                                    woman
+                                }  
+                            }`
+
+                    let allPupils = store.readQuery({
+                        query:allPupilsQuery 
+                    })
+
+                    allPupils.pupils = allPupils.pupils.map((f,idx) => {
+                        if(f.id == updatePupil.id)
                         {
-                            
+                            console.log("WIII")
                             f = updatePupil
+                            return f
                         }
                         return f
                     })
-                    store.writeQuery({query:this.query,data:dat})
-                },
-                optimisticResponse: {
 
+                    console.log(allPupils.pupils[0].firstName)
+                   
+                    store.writeQuery({
+                        query:allPupilsQuery ,
+                        data:allPupils
+                    })
+
+
+                    console.log(allPupils)
                 },
                 }).then((data) => {
                     // Result
                     next()
-                }).catch((error) => {
-                    console.log("FEL")
-                    console.error(error)
-                    
+                }).catch((error) => {           
                     // We restore the initial user input
-        })                
+                })                
     },
     beforeRouteUpdate (to, from, next) {
         this.client = this.$apollo.provider.defaultClient
@@ -177,6 +215,7 @@ export default {
                     lastName
                     conducting
                     comments
+                    woman
                 }  
             }`,
             variables() {
