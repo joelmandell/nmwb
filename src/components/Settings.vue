@@ -16,15 +16,15 @@
        
         <label>
                 First circuit week:
-                <select>
-                    <option :value="idx" v-for="(m,idx) in weeks">{{ m }}</option>
+                <select v-model="setting.circuitWeek1">
+                    <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
                 </select>
         </label>
 
         <label>
                 Second circuit week:
-                <select>
-                    <option :value="idx" v-for="(m,idx) in weeks">{{ m }}</option>
+                <select v-model="setting.circuitWeek2">
+                    <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
                 </select>
         </label>
 
@@ -35,24 +35,25 @@
 
         <label>
                 First circuit assembly:
-                <select>
-                    <option :value="idx" v-for="(m,idx) in weeks">{{ m }}</option>
+                <select v-model="setting.cAssembly1">
+                    <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
                 </select>
         </label>
 
         <label>
                 Second circuit assembly:
-                <select>
-                    <option :value="idx" v-for="(m,idx) in weeks">{{ m }}</option>
+                <select v-model="setting.cAssembly2">
+                    <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
                 </select>
         </label>
 
         <label>
                 Regional convention:
-                <select>
-                    <option :value="idx" v-for="(m,idx) in weeks">{{ m }}</option>
+                <select v-model="setting.regionalConvention">
+                    <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
                 </select>
         </label>
+        <button @click="saveSettings()" class="primary button">Save</button>
     </div>
 </template>
 <script>
@@ -67,7 +68,29 @@ export default {
             year:2017,
             days: moment.weekdays(),
             setting: {},
-            weeks: moment(this.year).isoWeeksInYear()
+            weeks: moment(this.year).isoWeeksInYear(),
+            client: null
+        }
+    },
+    created: function() {
+        this.client = this.$apollo.provider.defaultClient
+    },
+    methods: {
+        saveSettings: function() {
+            console.log(this.setting)
+            this.client.mutate({
+                mutation: gql`
+                    mutation ($input: SettingsInput) {
+                        updateSettings(input: $input) {
+                            id
+                        }
+                    }
+                `,
+                variables: {
+                    input: this.setting
+                }
+
+            })
         }
     },
     apollo: {
@@ -85,7 +108,14 @@ export default {
                 query($year:Int!) {
                     setting(year: $year)
                     {
+                        id
+                        year
                         dayMidweekMeeting
+                        circuitWeek1
+                        circuitWeek2
+                        cAssembly1
+                        cAssembly2
+                        regionalConvention
                         memorial
                     }
                 }
