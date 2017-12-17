@@ -136,6 +136,21 @@ const SettingsType = new GraphQLObjectType({
 	}
 }); 
 
+const SettingsInputType = new GraphQLInputObjectType({
+	name:'SettingsInput',
+	fields: {
+		id: { type: GraphQLInt },
+		year: { type: GraphQLInt },
+		dayMidweekMeeting: { type: GraphQLInt },
+		circuitWeek1: { type: GraphQLInt },
+		circuitWeek2: { type: GraphQLInt },
+		cAssembly1: { type: GraphQLInt },
+		cAssembly2: { type: GraphQLInt },
+		regionalConvention: { type: GraphQLInt },
+		memorial: { type: GraphQLString },
+	}
+}); 
+
 const UserType = new GraphQLObjectType({
 	name:'User',
 	fields: {
@@ -239,10 +254,28 @@ const RootMutation = new GraphQLObjectType({
 				})
 			}
 		},
+		updateSettings: {
+			type:SettingsType,
+			args: {
+				input: {
+					type: SettingsInputType
+				},
+			},
+			resolve(parentValue, {input}) {
+				return Settings.update(
+					input,
+					{ where : {id: input.id } }
+					).then( (data) => {
+						return Settings.findById(input.id).then( (data) => data)
+					})
+			}
+		},
 		addScheduleItem: {
 			type:ScheduleType,
-			input: {
-				type: ScheduleInputType
+			args: {
+				input: {
+					type: ScheduleInputType
+				},
 			},
 			resolve(parentValue, {input}) {
 				return Schedules.create({input})
