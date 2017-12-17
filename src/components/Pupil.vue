@@ -62,50 +62,35 @@ export default {
             this.$dialog.confirm('Please confirm to continue')
             .then(function () {               
                 self.client.mutate({
-                mutation: gql`mutation ($id: Int!) {
-                                    deletePupil(id:$id) {
-                                        id
-                                    }
-                                }`,
-                                // Parameters
-                                variables: {
-                                    id:self.$route.params.id,
-                                },
-                                update: (store, { data: {deletePupil} }) => {
-                                    let dat = store.readQuery({query:self.query})
+                mutation: gql
+                    `mutation 
+                        ($id: Int!) {
+                            deletePupil(id:$id) {
+                                id
+                            }
+                        }`,
+                        // Parameters
+                        variables: {
+                            id:self.$route.params.id,
+                        },
+                        update: (store, { data: {deletePupil} }) => {
+                            let dat = store.readQuery({query:self.query})
+                            if(typeof deletePupil == 'undefined') return
 
-                                    console.log(self.$route.params.id)
-                                    if(typeof deletePupil == 'undefined') return
-
-                                    // const index = dat.pupils.findIndex( (f) => f.id == self.$route.params.id)
-                                    // console.log(index)
-                                    // let ne = null
-                                    // if(index > -1)
-                                    // {
-                                    //     dat.pupils = dat.pupils.splice(index,1)
-                                    // }
-
-                                    store.writeQuery({query:self.query,data:dat.pupils.filter((f) => f.id != self.$route.params.id)})
-                                },
-                                optimisticResponse: {
-
-                            },
+                            store.writeQuery({query:self.query,data:dat.pupils.filter((f) => f.id != self.$route.params.id)})
+                        },
                 }).then((data) => {
-                    // Result
-                    console.log("IN THEN DATA")
-                    //self.modal.$hide("pupil")
                    self.$router.go(-1)
                 }).catch((error) => {
                     console.error(error)
                 })                
             })
             .catch(function () {
-                console.log('Clicked on cancel')
-            });
+
+});
         }
     },
     beforeRouteLeave (to, from, next) {
-        console.log("BEFORE CALLING MUTATE ON CLIENT:")
         this.client.mutate({
                 mutation: gql`mutation ($pupil: PupilInput) {
                     updatePupil(input:$pupil) {
@@ -117,12 +102,10 @@ export default {
                         woman
                     }
                 }`,
-                // Parameters
                 variables: {
                     pupil: this.pupil,
                 },
                 update: (store, {data: {updatePupil} }) => {
-
                     const query = gql `query ($id:Int) {
                         pupil(id:$id) {
                             id
@@ -177,15 +160,10 @@ export default {
                         return f
                     })
 
-                    console.log(allPupils.pupils[0].firstName)
-                   
                     store.writeQuery({
                         query:allPupilsQuery ,
                         data:allPupils
                     })
-
-
-                    console.log(allPupils)
                 },
                 }).then((data) => {
                     // Result
@@ -197,7 +175,6 @@ export default {
     beforeRouteUpdate (to, from, next) {
         this.client = this.$apollo.provider.defaultClient
         this.$modal.show("pupil")
-        //next()
     },
     created: function() {
         this.client = this.$apollo.provider.defaultClient

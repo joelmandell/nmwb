@@ -36,6 +36,15 @@ const Lessons = seq.import('./../models/mwb_lessons.js')
 const Settings = seq.import('./../models/mwb_settings.js')
 const Taxanomy = seq.import('./../models/mwb_taxanomy.js')
 
+const TaxanomyType = new GraphQLObjectType({
+	name:'Taxanomy',
+	fields: {
+		id: { type: GraphQLInt },
+		name: { type: GraphQLString },
+		participant: { type: GraphQLBoolean }
+	}
+}); 
+
 const ScheduleType = new GraphQLObjectType({
 	name:'Schedule',
 	fields: {
@@ -43,6 +52,13 @@ const ScheduleType = new GraphQLObjectType({
 		year: { type: GraphQLInt },
 		week: { type: GraphQLInt },
 		taxanomyId: { type: GraphQLInt },
+		taxanomies: { 
+			name:'taxanomies',
+			type: TaxanomyType,
+			resolve(parentValue) {
+				return Taxanomy.findOne({ where : {id:parentValue.dataValues.taxanomyId} }).then( (data) => data)				
+			}
+		},
 		pupilId: { type: GraphQLInt },
 		lessonId: { type: GraphQLInt },
 		participant: { type: GraphQLBoolean },
@@ -102,15 +118,6 @@ const LessonType = new GraphQLObjectType({
 	fields: {
 		id: { type: GraphQLInt },
 		name: { type: GraphQLString }
-	}
-}); 
-
-const TaxanomyType = new GraphQLObjectType({
-	name:'Taxanomy',
-	fields: {
-		id: { type: GraphQLInt },
-		name: { type: GraphQLString },
-		participant: { type: GraphQLBoolean }
 	}
 }); 
 
@@ -197,6 +204,15 @@ const RootQuery = new GraphQLObjectType({
 				return Taxanomy.findAll().then( (data) => data)
 			}
 		},
+		taxanomy: {
+			type: TaxanomyType,
+			args: {
+				id: {type: GraphQLInt }
+			},
+			resolve(parentValue, {id}) {
+				return Taxanomy.findOne({ where : {id} }).then( (data) => data)
+			}
+		}
 	}
 });
 

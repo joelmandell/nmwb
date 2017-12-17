@@ -41,7 +41,7 @@ window.$ = $
 
 const httpLink = new HttpLink({
   // You should use an absolute URL here
-  uri: 'http://localhost:4000/graphql/',
+  uri: 'http://192.168.0.100:4000/graphql/',
   headers: {
     authorization:"Bearer " + store._wrappedGetters.getToken(store)
   }
