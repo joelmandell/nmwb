@@ -54,9 +54,7 @@ export default {
     watch: {
         pupils: {
             handler: function (val) {
-                console.log("YO")
-                console.log(val)
-                if( typeof this.pupils[this.currentPupilIdx] == 'undefined') {
+                if(typeof this.pupils[this.currentPupilIdx] == 'undefined') {
                     this.currentPupilIdx = this.pupils.length-1
                     this.pupilId = this.pupils[this.pupils.length-1].id
                 }                
