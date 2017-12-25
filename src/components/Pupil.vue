@@ -49,7 +49,31 @@ export default {
         return {
             pupil:[],
             id:0,
-            client:null
+            client:null,
+            query: gql`
+            {
+                pupils {
+                    id
+                    firstName
+                    lastName
+                    conducting
+                    comments
+                    woman
+                    tasks {
+                        id
+		                year
+                        week
+                        taxanomies {
+                            name
+                            participant
+                        }
+		                taxanomyId
+                        pupilId
+		                lessonId
+		                participant
+                    }
+                }  
+            }`   
         }
     },
     methods: {
@@ -86,14 +110,14 @@ export default {
                             }
                             `
 
-                            let dat = store.readQuery({query,variables: {
-                                id:this.$route.params.id
-                            }})
-                            if(typeof deletePupil == 'undefined' || updatePupil == null) return
+                            let dat = store.readQuery({query:self.query})
+                            dat.pupils = dat.pupils.filter((f) => f.id != self.$route.params.id)
 
-                            store.writeQuery({query:self.query,data:dat.pupils.filter((f) => f.id != self.$route.params.id)})
+                            store.writeQuery({query:self.query,data:dat})
                         },
                 }).then((data) => {
+                    console.log("then data")
+                    console.log(data)
                    self.$router.go(-1)
                 }).catch((error) => {
                     console.error(error)
@@ -101,7 +125,7 @@ export default {
             })
             .catch(function () {
 
-});
+            });
         }
     },
     beforeRouteLeave (to, from, next) {
@@ -120,6 +144,7 @@ export default {
                     pupil: this.pupil,
                 },
                 update: (store, {data: {updatePupil} }) => {
+                    if(updatePupil == null) return
                     const query = gql `query ($id:Int) {
                         pupil(id:$id) {
                             id
@@ -197,8 +222,11 @@ export default {
                 },
                 }).then((data) => {
                     // Result
+                    console.log("then data")
+                    console.log(data)
                     next()
                 }).catch((error) => {           
+                    console.log(error)
                     // We restore the initial user input
                 })                
     },
