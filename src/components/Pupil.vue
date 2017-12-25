@@ -222,8 +222,6 @@ export default {
                 },
                 }).then((data) => {
                     // Result
-                    console.log("then data")
-                    console.log(data)
                     next()
                 }).catch((error) => {           
                     console.log(error)
