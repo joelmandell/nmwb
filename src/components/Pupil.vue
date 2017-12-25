@@ -74,8 +74,22 @@ export default {
                             id:self.$route.params.id,
                         },
                         update: (store, { data: {deletePupil} }) => {
-                            let dat = store.readQuery({query:self.query})
-                            if(typeof deletePupil == 'undefined') return
+                            const query = gql `query ($id:Int) {
+                                pupil(id:$id) {
+                                    id
+                                    firstName
+                                    lastName
+                                    conducting
+                                    comments
+                                    woman
+                                }
+                            }
+                            `
+
+                            let dat = store.readQuery({query,variables: {
+                                id:this.$route.params.id
+                            }})
+                            if(typeof deletePupil == 'undefined' || updatePupil == null) return
 
                             store.writeQuery({query:self.query,data:dat.pupils.filter((f) => f.id != self.$route.params.id)})
                         },
@@ -143,8 +157,21 @@ export default {
                                     conducting
                                     comments
                                     woman
+                                    tasks {
+                                        id
+                                        year
+                                        week
+                                        taxanomies {
+                                            name
+                                            participant
+                                        }
+                                        taxanomyId
+                                        pupilId
+                                        lessonId
+                                        participant
+                                    }
                                 }  
-                            }`
+                            }`        
 
                     let allPupils = store.readQuery({
                         query:allPupilsQuery 
@@ -153,8 +180,11 @@ export default {
                     allPupils.pupils = allPupils.pupils.map((f,idx) => {
                         if(f.id == updatePupil.id)
                         {
-                            console.log("WIII")
-                            f = updatePupil
+                            f.firstName = updatePupil.firstName
+                            f.lastName = updatePupil.lastName
+                            f.woman = updatePupil.woman
+                            f.comments = updatePupil.comments
+                            f.conducting = updatePupil.conducting
                             return f
                         }
                         return f

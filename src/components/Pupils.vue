@@ -11,7 +11,6 @@
         <button class="primary button" @click="change()">Edit pupil</button>
         <button class="primary button"><router-link style="color:#fff" to="/pupils/add">Add new</router-link></button>
         <h3>Tasks</h3>
-        {{ pupils.length > 0}}
         <table v-if="pupils.length>0">
             <thead>
                 <th>Year</th>

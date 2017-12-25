@@ -22,7 +22,7 @@ Vue.use(VuejsDialog)
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/',  component: { template: "<h1>TEST</h1>"}},
+  { path: '/',  component: { template: "<div><h1>Living as Christians</h1><p>Here you can administrate the schedules.</p></div>"}},
   { path: '/login', component: Login },
   { path: '/settings', component: Settings },
   { path: '/pupils', component: Pupils,

@@ -26,7 +26,9 @@
 
                             </textarea>
                         </label>
-
+                        <label>Woman:
+                            <input type="checkbox" v-model="pupil.woman" />
+                        </label>
                         <button class="primary button" @click="add">Add pupil</button>
                     </div>
                 </div>
@@ -50,15 +52,29 @@ export default {
                 comments:'',
             },
             query: gql`
-                        {
-                            pupils {
-                                id
-                                firstName
-                                lastName
-                                conducting
-                                comments
-                            }  
-                        }` 
+                            {
+                                pupils {
+                                    id
+                                    firstName
+                                    lastName
+                                    conducting
+                                    comments
+                                    woman
+                                    tasks {
+                                        id
+                                        year
+                                        week
+                                        taxanomies {
+                                            name
+                                            participant
+                                        }
+                                        taxanomyId
+                                        pupilId
+                                        lessonId
+                                        participant
+                                    }
+                                }  
+                            }` 
         }
     },
     beforeRouteUpdate (to, from, next) {
@@ -88,6 +104,7 @@ export default {
                             lastName
                             conducting
                             comments
+                            woman
                         }
                     }
                 `,
@@ -96,7 +113,13 @@ export default {
                 },
                 update: (store, {data: {addPupil}}) => {
                     const dat = store.readQuery({query:this.query})
-                    dat.pupils.push(addPupil)
+
+                    let newPupil = cloneDeep(addPupil)
+                    
+                    newPupil["tasks"] = new Array()
+
+                    dat.pupils.push(newPupil)
+
                     store.writeQuery({query:this.query,data:dat})
                 }
             }).then( (data) => {

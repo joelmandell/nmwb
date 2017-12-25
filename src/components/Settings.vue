@@ -1,59 +1,61 @@
 <template>
     <div>
         <h3>Settings for service year:</h3>
-        <select v-model="year" >
-            <option :value="s.year" v-for="s in settings">
-                {{ s.year }}
-            </option>
-        </select>
-
-        <label>
-            {{ $t("label.meetingday") }}:
-            <select v-model="setting.dayMidweekMeeting">
-                <option :value="idx" v-for="(m,idx) in days">{{ m }}</option>
+        <div v-show="settings.length>0">
+            <select v-model="year" >
+                <option :value="s.year" v-for="s in settings">
+                    {{ s.year }}
+                </option>
             </select>
-        </label>
-       
-        <label>
-                First circuit week:
-                <select v-model="setting.circuitWeek1">
-                    <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
-                </select>
-        </label>
 
-        <label>
-                Second circuit week:
-                <select v-model="setting.circuitWeek2">
-                    <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
+            <label>
+                {{ $t("label.meetingday") }}:
+                <select v-model="setting.dayMidweekMeeting">
+                    <option :value="idx" v-for="(m,idx) in days">{{ m }}</option>
                 </select>
-        </label>
+            </label>
+        
+            <label>
+                    First circuit week:
+                    <select v-model="setting.circuitWeek1">
+                        <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
+                    </select>
+            </label>
 
-        <label>
-                Memorial
-                <input type="date" v-model="setting.memorial" />
-        </label>
+            <label>
+                    Second circuit week:
+                    <select v-model="setting.circuitWeek2">
+                        <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
+                    </select>
+            </label>
 
-        <label>
-                First circuit assembly:
-                <select v-model="setting.cAssembly1">
-                    <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
-                </select>
-        </label>
+            <label>
+                    Memorial
+                    <input type="date" v-model="setting.memorial" />
+            </label>
 
-        <label>
-                Second circuit assembly:
-                <select v-model="setting.cAssembly2">
-                    <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
-                </select>
-        </label>
+            <label>
+                    First circuit assembly:
+                    <select v-model="setting.cAssembly1">
+                        <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
+                    </select>
+            </label>
 
-        <label>
-                Regional convention:
-                <select v-model="setting.regionalConvention">
-                    <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
-                </select>
-        </label>
-        <button @click="saveSettings()" class="primary button">Save</button>
+            <label>
+                    Second circuit assembly:
+                    <select v-model="setting.cAssembly2">
+                        <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
+                    </select>
+            </label>
+
+            <label>
+                    Regional convention:
+                    <select v-model="setting.regionalConvention">
+                        <option :value="m" v-for="(m,idx) in weeks">{{ m }}</option>
+                    </select>
+            </label>
+            <button @click="saveSettings()" class="primary button">Save</button>
+        </div>
     </div>
 </template>
 <script>
