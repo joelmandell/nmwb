@@ -9,7 +9,7 @@
             </option>
         </select>
         <button class="primary button" @click="change()">Edit pupil</button>
-        <button class="primary button"><router-link style="color:#fff" to="/pupils/add">Add new</router-link></button>
+        <button class="primary button" @click="add()">Add new</button>
         <h3>Tasks</h3>
         <table v-if="pupils.length>0">
             <thead>
@@ -60,6 +60,9 @@ export default {
         change: function()
         {
             this.$router.push("/pupils/edit/"+this.pupilId)
+        },
+        add: function() {
+            this.$router.push("/pupils/add")
         }
     },
     created: function() {
