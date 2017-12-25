@@ -48,16 +48,28 @@ export default {
             pupils:[],
             pupilId:1,
             currentPupilIdx:0,
-            client:null
+            client:null,
+            first:true,
+            currentLength:0
         }
     },
     watch: {
         pupils: {
             handler: function (val) {
+
                 if(typeof this.pupils[this.currentPupilIdx] == 'undefined') {
                     this.currentPupilIdx = this.pupils.length-1
                     this.pupilId = this.pupils[this.pupils.length-1].id
-                }                
+                } else {
+                    if(!this.first && val.length < this.currentLength )
+                    {
+                        this.currentPupilIdx-=1
+                        this.pupilId = this.pupils[this.currentPupilIdx].id
+                    }
+                }               
+
+                this.currentLength = this.pupils.length
+                this.first = false
             },
             deep:true
         },
