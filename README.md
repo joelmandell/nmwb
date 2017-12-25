@@ -3,7 +3,7 @@
 > UI for managing and creating schedules for \"Life as Christians\"-meeting.
 
 ## ANNOUNCEMENT
-> DUE TO LACK OF TIME: PLANNED FIRST RELASE DATE (WAS 10 December 2017) IS POSTPONED TIL 1 MARCH. I HAVE 
+> DUE TO LACK OF TIME: PLANNED FIRST RELASE DATE (WAS 10 December 2017 And later 1 March 2018) IS POSTPONED TIL 1 September 2018. I HAVE 
 > A TIGHT SCHEDULE AND WILL NOT MAKE IT IN TIME.
 
 ## Build Setup
