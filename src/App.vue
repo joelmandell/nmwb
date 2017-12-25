@@ -5,20 +5,22 @@
           <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
               <li><router-link class="menu-text" to="/">MWB</router-link></li>
-                <li v-show="getToken != null">
-                  <router-link to="/taxonomies">Taxonomies</router-link>
-                </li>
-                <li v-show="getToken != null">
-                  <router-link to="/pupils"> {{ $t("menu.pupils") }}</router-link>
-                </li>
-                <li v-show="getToken != null">
-                  <router-link to="/settings">
-                    {{ $t("menu.settings") }}
-                  </router-link>
-                </li>
-                <li v-show="getToken != null"><router-link to="/" @click.native="signout">Sign out</router-link></li>
-                <li v-show="getToken == null"><router-link to="/signin">Sign in</router-link></li>
-
+              <li v-show="getToken != null">
+                <router-link to="/settings">
+                  {{ $t("menu.settings") }}
+                </router-link>
+              </li>
+              <li v-show="getToken != null">
+                <router-link to="/taxonomies">{{ $t("menu.taxonomies") }}</router-link>
+              </li>
+              <li v-show="getToken != null">
+                <router-link to="/pupils"> {{ $t("menu.pupils") }}</router-link>
+              </li>
+              <li v-show="getToken != null">
+                <router-link to="/schedule"> {{ $t("menu.schedule") }}</router-link>
+              </li>
+              <li v-show="getToken != null"><router-link to="/" @click.native="signout">Sign out</router-link></li>
+              <li v-show="getToken == null"><router-link to="/signin">Sign in</router-link></li>
             </ul>
           </div>
         </div>

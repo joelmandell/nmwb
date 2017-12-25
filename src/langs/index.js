@@ -16,7 +16,9 @@ const messages = {
             meetingday: 'Day for midweekmeeting'
         },
         menu: {
+            taxonomies: 'Taxonomies',
             pupils: 'Pupils',
+            schedule:'Schedules',
             settings: 'Settings'
         }
     },
@@ -32,7 +34,9 @@ const messages = {
             meetingday: 'Dag för veckomötet'
         },
         menu: {
+            taxonomies: 'Taxonomer',
             pupils: 'Elever',
+            schedule:'Schedules',
             settings: 'Inställningar'
         }
     }
