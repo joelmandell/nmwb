@@ -6,6 +6,9 @@
             <ul class="dropdown menu" data-dropdown-menu>
               <li><router-link class="menu-text" to="/">MWB</router-link></li>
                 <li v-show="getToken != null">
+                  <router-link to="/taxonomies">Taxonomies</router-link>
+                </li>
+                <li v-show="getToken != null">
                   <router-link to="/pupils"> {{ $t("menu.pupils") }}</router-link>
                 </li>
                 <li v-show="getToken != null">
@@ -16,12 +19,6 @@
                 <li v-show="getToken != null"><router-link to="/" @click.native="signout">Sign out</router-link></li>
                 <li v-show="getToken == null"><router-link to="/signin">Sign in</router-link></li>
 
-            </ul>
-          </div>
-          <div class="top-bar-right">
-            <ul class="menu" v-if="getToken != null">
-              <li><input type="search" placeholder="Search"></li>
-              <li><button type="button" class="button">Search</button></li>
             </ul>
           </div>
         </div>
