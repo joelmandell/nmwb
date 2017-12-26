@@ -36,14 +36,22 @@ const Lessons = seq.import('./../models/mwb_lessons.js')
 const Settings = seq.import('./../models/mwb_settings.js')
 const Taxanomy = seq.import('./../models/mwb_taxanomy.js')
 
-const TaxanomyType = new GraphQLObjectType({
-	name:'Taxanomy',
+const TaxonomyType = new GraphQLObjectType({
+	name:'Taxonomy',
 	fields: {
 		id: { type: GraphQLInt },
 		name: { type: GraphQLString },
-		participant: { type: GraphQLBoolean }
+		participant: { type: GraphQLInt }
 	}
 }); 
+
+const TaxonomyInputType = new GraphQLInputObjectType({
+	name:'TaxonomyInput',
+	fields: {
+		name: { type: GraphQLString },
+		participant: { type: GraphQLInt }
+	}
+});
 
 const ScheduleType = new GraphQLObjectType({
 	name:'Schedule',
@@ -54,7 +62,7 @@ const ScheduleType = new GraphQLObjectType({
 		taxanomyId: { type: GraphQLInt },
 		taxanomies: { 
 			name:'taxanomies',
-			type: TaxanomyType,
+			type: TaxonomyType,
 			resolve(parentValue) {
 				return Taxanomy.findOne({ where : {id:parentValue.dataValues.taxanomyId} }).then( (data) => data)				
 			}
@@ -214,13 +222,13 @@ const RootQuery = new GraphQLObjectType({
 			}
 		},
 		taxonomies: {
-			type:new GraphQLList(TaxanomyType),
+			type:new GraphQLList(TaxonomyType),
 			resolve(parentValue) {
 				return Taxanomy.findAll().then( (data) => data)
 			}
 		},
 		taxanomy: {
-			type: TaxanomyType,
+			type: TaxonomyType,
 			args: {
 				id: {type: GraphQLInt }
 			},
@@ -288,6 +296,17 @@ const RootMutation = new GraphQLObjectType({
 			},
 			resolve(parentValue, {input}) {
 				return Schedules.create({input})
+			}
+		},
+		addTaxonomy: {
+			type: TaxonomyType,
+			args: {
+				taxonomy: {
+					type: TaxonomyInputType
+				}
+			},
+			resolve(parentValue, {taxonomy}) {
+				return Taxanomy.create(taxonomy)
 			}
 		},
 		addPupil: {

@@ -13,7 +13,9 @@ const messages = {
             lastName: 'Last name',
             conducting: 'Conducting',
             comments: 'Comments',
-            meetingday: 'Day for midweekmeeting'
+            meetingday: 'Day for midweekmeeting',
+            name: 'Name',
+            participant: 'Participant'
         },
         menu: {
             taxonomies: 'Taxonomies',
@@ -31,7 +33,9 @@ const messages = {
             lastName: 'Efternamn',
             conducting: 'Leder',
             comments: 'Kommentarer',
-            meetingday: 'Dag för veckomötet'
+            meetingday: 'Dag för veckomötet',
+            name: 'Namn',
+            participant: 'Medverkande'
         },
         menu: {
             taxonomies: 'Taxonomer',

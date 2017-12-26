@@ -13,6 +13,7 @@ import Pupils from './components/Pupils.vue'
 import Pupil from './components/Pupil.vue'
 import AddPupil from './components/AddPupil.vue'
 import Taxonomies from './components/Taxonomies.vue'
+import AddTaxonomy from './components/AddTaxonomy.vue'
 import {mapActions} from 'vuex'
 import langs from './langs/'
 import VuejsDialog from "vuejs-dialog"
@@ -26,7 +27,11 @@ const routes = [
   { path: '/',  component: { template: "<div><h1>Living as Christians</h1><p>Here you can administrate the schedules.</p></div>"}},
   { path: '/login', component: Login },
   { path: '/settings', component: Settings },
-  { path: '/taxonomies', component: Taxonomies },
+  { path: '/taxonomies', component: Taxonomies,
+    children: [
+      { path: 'add', component: AddTaxonomy }
+    ]
+  },
   { path: '/pupils', component: Pupils,
     children: [
       { path: 'edit/:id', component: Pupil },
