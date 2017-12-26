@@ -71,7 +71,23 @@ export default {
             days: moment.weekdays(),
             setting: {},
             weeks: moment(this.year).isoWeeksInYear(),
-            client: null
+            client: null,
+            settingsQuery: gql`
+                query($year:Int!) {
+                    setting(year: $year)
+                    {
+                        id
+                        year
+                        dayMidweekMeeting
+                        circuitWeek1
+                        circuitWeek2
+                        cAssembly1
+                        cAssembly2
+                        regionalConvention
+                        memorial
+                    }
+                }
+            `,
         }
     },
     created: function() {
@@ -79,7 +95,7 @@ export default {
     },
     methods: {
         saveSettings: function() {
-            console.log(this.setting)
+            let self = this
             this.client.mutate({
                 mutation: gql`
                     mutation ($input: SettingsInput) {
@@ -89,9 +105,14 @@ export default {
                     }
                 `,
                 variables: {
-                    input: this.setting
-                }
+                    input: self.setting
+                },
+                update: (store,{data:{updateSettings}}) => {
+                    const settings = store.readQuery({query:self.settingsQuery,variables: { year : self.year }})
 
+                    settings.setting = self.setting
+                    store.writeQuery({query:self.settingsQuery,data:settings,variables:{ year: self.year }})
+                }
             })
         }
     },
