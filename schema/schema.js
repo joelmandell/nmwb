@@ -41,7 +41,8 @@ const TaxonomyType = new GraphQLObjectType({
 	fields: {
 		id: { type: GraphQLInt },
 		name: { type: GraphQLString },
-		participant: { type: GraphQLInt }
+		participant: { type: GraphQLInt },
+		movie: { type: GraphQLInt }
 	}
 }); 
 
@@ -49,7 +50,8 @@ const TaxonomyInputType = new GraphQLInputObjectType({
 	name:'TaxonomyInput',
 	fields: {
 		name: { type: GraphQLString },
-		participant: { type: GraphQLInt }
+		participant: { type: GraphQLInt },
+		movie: { type: GraphQLInt }
 	}
 });
 
@@ -317,7 +319,6 @@ const RootMutation = new GraphQLObjectType({
 				}
 			},
 			resolve(parentValue, {pupil}) {
-				console.log(pupil)
 				return Pupils.create(pupil)
 			}
 		},

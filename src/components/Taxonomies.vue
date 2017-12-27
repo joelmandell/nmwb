@@ -2,10 +2,9 @@
     <div>
         <router-view></router-view>
         <h3>Taxonomies</h3>
-
         <select>
             <option :value="p.id" :key="p.id" v-for="p in taxonomies">
-                {{ p.name }} {{ p.participant ? " (with participant)" : ""}}
+                {{ p.name }} {{ p.participant ? " (with participant)" : ""}} {{ p.movie ? " (movie)" : ""}}
             </option>
         </select>
 
@@ -33,6 +32,7 @@ export default {
                 taxonomies {
                     id
                     name
+                    movie
                     participant
                 }
             }`

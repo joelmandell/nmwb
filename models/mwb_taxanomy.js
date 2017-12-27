@@ -12,6 +12,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
+    movie: {
+      type: DataTypes.INTEGER(1),
+      allowNull: false
+    },
     participant: {
       type: DataTypes.INTEGER(1),
       allowNull: false

@@ -10,6 +10,15 @@
                             {{ $t("label.name") }}:
                             <input type="text" v-model="taxonomy.name" />    
                         </label>
+                        
+                        <label>
+                            Movie:
+                            <select v-model="taxonomy.movie">
+                                <option value="1">YES</option>
+                                <option selected value="0">NO</option>
+                            </select>
+                        </label>
+
                         <label>
                             {{ $t("label.participant") }}:
                             <select v-model="taxonomy.participant">
@@ -35,8 +44,9 @@ export default {
     data() {
         return {
             taxonomy:{
-                name:'Placeholder',
+                name:'',
                 participant:0,
+                movie:0
             },
         }
     },
@@ -64,6 +74,7 @@ export default {
                             id
                             name
                             participant
+                            movie
                         }
                     }
                 `,
@@ -77,6 +88,7 @@ export default {
                                 id
                                 name
                                 participant
+                                movie
                             }
                         }`
 
