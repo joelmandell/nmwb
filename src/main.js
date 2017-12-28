@@ -14,6 +14,7 @@ import Pupil from './components/Pupil.vue'
 import AddPupil from './components/AddPupil.vue'
 import Taxonomies from './components/Taxonomies.vue'
 import AddTaxonomy from './components/AddTaxonomy.vue'
+import Schedule from './components/Schedule.vue'
 import {mapActions} from 'vuex'
 import langs from './langs/'
 import VuejsDialog from "vuejs-dialog"
@@ -37,7 +38,8 @@ const routes = [
       { path: 'edit/:id', component: Pupil },
       { path: 'add', component: AddPupil }
     ]
-  }
+  },
+  { path: '/schedule', component: Schedule },
 ]
 
 const router = new VueRouter({
